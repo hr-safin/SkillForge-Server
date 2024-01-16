@@ -30,6 +30,7 @@ async function run() {
 
     const courseCollection = client.db("courseDB").collection("course")
     const purchaseCollection = client.db("purchaseDB").collection("purchase")
+    const enrolledCollection = client.db("enrollDB").collection("enroll")
     
 
     app.get("/course",async (req,res) =>{
