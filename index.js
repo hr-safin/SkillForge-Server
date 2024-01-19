@@ -29,7 +29,6 @@ async function run() {
     await client.connect();
 
     const courseCollection = client.db("courseDB").collection("course")
-    const purchaseCollection = client.db("purchaseDB").collection("purchase")
     const enrolledCollection = client.db("enrollDB").collection("enroll")
     
 
