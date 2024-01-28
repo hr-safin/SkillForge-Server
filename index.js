@@ -86,29 +86,27 @@ async function run() {
 
     // all user api
 
-    app.post("/allUser", async(req,res) => {
-      const userDetails = req.body
-      const query = {email : userDetails?.email}
-      const exist = await userCollection.findOne(query)
-
-      if(exist){
-        res.send({message : "Email is already used", insertedId : null})
+    app.post("/allUser",  async (req, res) => {
+      const userDetails = req.body;
+      const query = { email: userDetails?.email };
+      const exist = await userCollection.findOne(query);
+      if (exist) {
+        return res.send({ message: "Email is already used", insertedId: null });
       }
 
-      const result = await userCollection.insertOne(userDetails)
-      res.send(result)
-
-    })
+      const result = await userCollection.insertOne(userDetails);
+      res.send(result);
+    });
 
     // token generate
 
-    app.post("/jwt", async(req, res) => {
-      const userInfo = req.body;
-      const token = jwt.sign(userInfo, process.env.ACCESS_SECRET_TOKEN, {
-        expiresIn: "2hr",
-      });
-      res.send({token})
-    });
+    // app.post("/jwt", async(req, res) => {
+    //   const userInfo = req.body;
+    //   const token = jwt.sign(userInfo, process.env.ACCESS_SECRET_TOKEN, {
+    //     expiresIn: "2hr",
+    //   });
+    //   res.send({token})
+    // });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
