@@ -29,6 +29,7 @@ async function run() {
 
     const courseCollection = client.db("courseDB").collection("course");
     const enrolledCollection = client.db("enrollDB").collection("enroll");
+    const userCollection = client.db("userDB").collection("user")
 
     app.get("/course", async (req, res) => {
       const cursor = courseCollection.find();
@@ -82,6 +83,22 @@ async function run() {
       const result = await enrolledCollection.find(query);
       res.send(result);
     });
+
+    // all user api
+
+    app.post("/allUser", async(req,res) => {
+      const userDetails = req.body
+      const query = {email : userDetails?.email}
+      const exist = await userCollection.findOne(query)
+
+      if(exist){
+        res.send({message : "Email is already used", insertedId : null})
+      }
+
+      const result = await userCollection.insertOne(userDetails)
+      res.send(result)
+
+    })
 
     // token generate
 
