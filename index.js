@@ -108,7 +108,7 @@ async function run() {
 
     // all user api
 
-    app.get("/allUser", async(req,res) => {
+    app.get("/allUser", verifyToken, async(req,res) => {
      console.log(req.headers)
       const cursor = userCollection.find()
       const result = await cursor.toArray()
@@ -119,7 +119,7 @@ async function run() {
       const userDetails = req.body;
       const query = { email: userDetails?.email };
       const exist = await userCollection.findOne(query);
-      if (exist) {
+      if(exist) {
         return res.send({ message: "Email is already used", insertedId: null });
       }
 
@@ -130,9 +130,9 @@ async function run() {
     // token generate
 
     app.post("/jwt", async(req, res) => {
-      const userInfo = req.body;
-      const token = jwt.sign(userInfo, process.env.ACCESS_SECRET_TOKEN, {
-        expiresIn: "2hr",
+      const user = req.body;
+      const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, {
+        expiresIn: "3hr",
       });
       res.send({token})
     });
