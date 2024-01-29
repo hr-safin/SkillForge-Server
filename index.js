@@ -108,7 +108,7 @@ async function run() {
 
     // all user api
 
-    app.get("/allUser",verifyToken, async(req,res) => {
+    app.get("/allUser", async(req,res) => {
      console.log(req.headers)
       const cursor = userCollection.find()
       const result = await cursor.toArray()
