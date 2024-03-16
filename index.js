@@ -77,12 +77,21 @@ async function run() {
 
     // enrolled course
 
-    app.get("/enrolled/:email", async (req, res) => {
-      const email = req.params.email;
-      const query = { email: email };
-      const result = await enrolledCollection.find(query);
-      res.send(result);
-    });
+    // app.get("/enrolled/:email", async (req, res) => {
+    //   const email = req.params.email;
+    //   const query = { email: email };
+    //   const result = await enrolledCollection.find(query);
+    //   res.send(result);
+    // });
+
+    //mycourse enrolled course
+
+    app.get("/myCourse", async(req,res) => {
+      const email = req.params.email
+      const query = {email : email}
+      const result = await enrolledCollection.find(query)
+      res.send(result)
+    })
 
 
     // middleware
