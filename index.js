@@ -82,6 +82,7 @@ async function run() {
       const query = { email: email };
       const cursor = enrolledCollection.find(query)
       const result = await cursor.toArray();
+      console.log(result)
       res.send(result);
     });
 
