@@ -85,6 +85,23 @@ async function run() {
       res.send(result);
     });
 
+    //delete enrolled course
+
+    // Delete an enrolled course
+app.delete("/enrolled/:email", async (req, res) => {
+  const email = req.params.email;
+
+
+    const query = { email: email }; // Ensure the ID is converted to ObjectId
+    const result = await enrolledCollection.deleteOne(query); // Use the enrolledCollection to delete the record
+    if (result.deletedCount === 1) {
+      res.send(result);
+    }
+  
+});
+
+    
+
 
 
     // middleware
